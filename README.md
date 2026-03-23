@@ -24,7 +24,7 @@
 | **Compare** | `SLT`, `SLTI` | Set if less than |
 | **Memory** | `LW`, `SW` | Load / store a word |
 | **Branch** | `BEQ`, `BNE` | Branch if equal / not equal |
-| **Jump** | `JAL` | Jump and link (function calls) |
+| **Jump** | `JAL`, `JALR` | Function calls, returns, and indirect jumps |
 
 Adding more instructions later just means adding entries to decoder — the pipeline doesn't change.
 
@@ -159,10 +159,9 @@ AXI4-Lite is a simple request/response bus. CPU is the master, peripherals are s
 | Phase | What to do | Time |
 |---|---|---|
 | **1. Study** | Learn RV32I encoding + pipeline concepts (Harris & Harris book, Ch. 7) | 1 week |
-| **2. ALU + RegFile** | Code & test ALU and register file individually | 1 week |
-| **3. Pipeline skeleton** | Wire up 5 stages with pipeline registers, no hazard handling | 1.5 weeks |
+| **2. ALU + RegFile** |Code modules & write basic testbenches | 1 week |
+| **3. Pipeline skeleton** | Wire up 5 stages, simulate basic instruction flow | 1.5 weeks |
 | **4. Hazards** | Add forwarding unit + stall logic + branch flush | 1.5 weeks |
 | **5. Memory** | Integrate BRAM for I-MEM and D-MEM | 3–4 days |
 | **6. AXI4-Lite** | Build bus master + interconnect + UART slave | 1.5 weeks |
-| **7. Simulate** | Run test programs, verify in simulation | 1 week |
-| **8. FPGA** | Synthesize, put on board, print "Hello RISC-V!" over UART | 3–4 days |
+| **7. Simulate** | Run C/Assembly test programs, verify full AXI interactions, finishing full system | 1.5 weeks |
