@@ -1,7 +1,4 @@
 # RISC-V 5-Stage Pipelined Processor
-
-**Goal:** Design a 5-stage pipelined RV32I core with AXI4-Lite bus for educational purpose.
-
 ---
 
 ## Scope — What's Included
