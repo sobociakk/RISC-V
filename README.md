@@ -74,7 +74,7 @@ In a pipelined design, the IF stage reads an instruction while the MEM stage rea
 
 - **Industry standard** — used everywhere in Xilinx/AMD and ARM SoCs
 - **Simple variant** of AXI — no burst, no out-of-order — perfect for learning
-- **Proves system integration** — your CPU actually talks to peripherals
+- **Proves system integration** — CPU actually talks to peripherals
   
 ---
 
