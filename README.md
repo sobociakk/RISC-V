@@ -45,21 +45,6 @@ Adding more instructions later just means adding entries to decoder — the pipe
 
 ## Design Trade-offs
 
-### Why 5-stage pipeline?
-
-Think of a pipeline like a laundry assembly line:
-
-```
-Without pipeline:  [wash+dry+fold]        [wash+dry+fold]        ← 1 shirt at a time
-                   ==================     ==================
-
-With 5-stage:      [wash] [dry] [fold]                            ← 3 shirts overlapping
-                          [wash] [dry] [fold]
-                                 [wash] [dry] [fold]
-```
-
-Each stage does less work → shorter clock period → higher clock speed.
-
 | | Single-cycle | 5-stage pipeline |
 |---|---|---|
 | Clock speed | Slow (long critical path) | Fast (short stages) |
@@ -82,11 +67,11 @@ In a pipelined design, the IF stage reads an instruction while the MEM stage rea
 
 | Stage | Describe | Key hardware |
 |---|---|---|
-| **① IF** | Uses the PC to read the next instruction from memory. PC increments by +4 (or jumps if branching). | PC register, I-MEM, adder, mux |
-| **② ID** | Figures out what instruction it is, reads source registers, generates immediate. | Decoder, Register File (2 read ports), Imm Gen |
-| **③ EX** | Does the actual computation (add, subtract, compare, shift). Checks branch conditions. | ALU, Branch Comparator, Forwarding Muxes |
-| **④ MEM** | Access data memory — only used by `LW` (load) and `SW` (store). Other instructions just pass through. | Data Memory |
-| **⑤ WB** | Writes the result back into the register file (destination register `rd`). | Write-back mux |
+| ** IF** | Uses the PC to read the next instruction from memory. PC increments by +4 (or jumps if branching). | PC register, I-MEM, adder, mux |
+| ** ID** | Figures out what instruction it is, reads source registers, generates immediate. | Decoder, Register File (2 read ports), Imm Gen |
+| ** EX** | Does the actual computation (add, subtract, compare, shift). Checks branch conditions. | ALU, Branch Comparator, Forwarding Muxes |
+| ** MEM** | Access data memory — only used by `LW` (load) and `SW` (store). Other instructions just pass through. | Data Memory |
+| ** WB** | Writes the result back into the register file (destination register `rd`). | Write-back mux |
 
 ### Pipeline Registers
 
@@ -148,16 +133,3 @@ AXI4-Lite is a simple request/response bus. CPU is the master, peripherals are s
 | Read Address | `ARADDR`, `ARVALID`, `ARREADY` | M → S | Where to read |
 | Read Data | `RDATA`, `RRESP`, `RVALID`, `RREADY` | S → M | Data back |
 
----
-
-## Build Roadmap (~8 weeks)
-
-| Phase | What to do | Time |
-|---|---|---|
-| **1. Study** | Learn RV32I encoding + pipeline concepts (Harris & Harris book, Ch. 7) | 1 week |
-| **2. ALU + RegFile** |Code modules & write basic testbenches | 1 week |
-| **3. Pipeline skeleton** | Wire up 5 stages, simulate basic instruction flow | 1.5 weeks |
-| **4. Hazards** | Add forwarding unit + stall logic + branch flush | 1.5 weeks |
-| **5. Memory** | Integrate BRAM for I-MEM and D-MEM | 3–4 days |
-| **6. AXI4-Lite** | Build bus master + interconnect + UART slave | 1.5 weeks |
-| **7. Simulate** | Run C/Assembly test programs, verify full AXI interactions, finishing full system | 1.5 weeks |
