@@ -80,7 +80,7 @@ In a pipelined design, the IF stage reads an instruction while the MEM stage rea
 
 ### What Each Stage Does
 
-| Stage | Plain English | Key hardware |
+| Stage | Describe | Key hardware |
 |---|---|---|
 | **① IF** | Uses the PC to read the next instruction from memory. PC increments by +4 (or jumps if branching). | PC register, I-MEM, adder, mux |
 | **② ID** | Figures out what instruction it is, reads source registers, generates immediate. | Decoder, Register File (2 read ports), Imm Gen |
