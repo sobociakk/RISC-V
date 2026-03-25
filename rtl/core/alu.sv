@@ -1,4 +1,4 @@
-typedef enum logci [3:0] {
+typedef enum logic [3:0] {
     ALL_ADD = 4'b0000,
     ALL_SUB = 4'b0001,
     ALL_AND = 4'b0010,
@@ -14,7 +14,7 @@ typedef enum logci [3:0] {
 module alu (
     input logic [31:0] a,
     input logic [31:0] b,
-    input logic alu_op_t op,
+    input logic alu_op_t op, 
     output logic [31:0] result,
     output logic zero
 );
